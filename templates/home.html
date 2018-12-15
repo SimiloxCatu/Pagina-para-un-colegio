@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+            </ol>
+        </nav>
+        <div class="row align-items-center">
+            <div class="col-md-4 order-md-2 mb-3">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-muted">Your profile {{ user.username }}</span>
+                <i class="fas fa-id-card"></i>
+            </h4>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Name</h6>
+                        <small class="text-muted">{{ user.first_name }} {{ user.last_name }}</small>
+                    </div>
+                    <i class="fas fa-user"></i>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">E-Mail</h6>
+                        <small class="text-muted"> {{ user.email }} </small>
+                    </div>
+                    <i class="fas fa-at"></i>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Role</h6>
+                        <small class="text-muted"> {{ user.telephone }} </small>
+                    </div>
+                    <i class="fas fa-map-marker-alt"></i>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    <div>
+                        <h6 class="my-0">Telephone</h6>
+                        <small class="text-muted"> {{ user.telephone }} </small>
+                    </div>
+                    <i class="fas fa-phone"></i>
+                </li>
+                <li class="list-group-item d-flex justify-content-between bg-light">
+                    <span class="mt-2">Do you want to edit your user?</span>
+                    <a href="" class="btn btn-light"> <i class="far fa-edit"></i> </a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-8 order-md-1 mb-3">
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex bg-light">
+                    <div class="text-center">
+                        <p class="lead">
+                            Welcome!<br>
+                            {% if user.is_authenticated and user.is_supervisor or user.is_superuser%}
+                                You have supervisor's permissions and you can manage class rooms and users.<br><br>
+                                <div class="text-center">
+                                    <a class="btn btn-success" href="{% url 'user_list' %}">Users</a>
+                                    <a class="btn btn-success" href="{% url 'course_list' %}">Courses</a>
+                                </div><br><br>
+                            {% endif %}
+                            {% if user.is_authenticated and user.is_teacher %}
+                                You have teacher's permissions and you belongs to {{ user.classroom }}.<br><br>
+                                <div class="text-center">
+                                    <a class="btn btn-success" href="">Asistence</a>
+                                    <a class="btn btn-success" href="{% url 'homework_list' %}">Homeworks</a>
+                                </div><br><br>
+                            {% endif %}
+                            {% if user.is_authenticated and user.is_student %}
+                                You have student's permissions and you belongs to {{ user.classroom }}.<br><br>
+                                <div class="text-center">
+                                    <a class="btn btn-success" href="#">Tasks</a>
+                                </div><br><br>
+                            {% endif %}
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% else %}
+    
+{% endif %}
+{% endblock %}

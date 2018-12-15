@@ -1,0 +1,17 @@
+{% for user in users %}
+  <tr>
+    <td>{{ user.id }}</td>
+    <td>{{ user.username }}</td>
+    <td>{{ user.first_name }}</td>
+    <td>{{ user.last_name }}</td>
+    <td>{{ user.email }}</td>
+    <td>{{ user.telephone }}</td>
+    <td>{{ user.is_student }}</td>
+    <td>{{ user.is_teacher }}</td>
+    <td>{{ user.is_supervisor }}</td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No user</td>
+  </tr>
+{% endfor %}

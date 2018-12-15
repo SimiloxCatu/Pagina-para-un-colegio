@@ -1,0 +1,41 @@
+{% extends 'basi.html' %}
+
+{% load static %}
+
+{% block javascript %}
+  <script src="{% static 'homeworks/js/homeworks.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+  <p>
+    <button type="button" class="btn btn-primary js-create-homework" data-url="{% url 'homework_create' %}">
+      <span class="glyphicon glyphicon-plus"></span>
+      New homework
+    </button>
+  </p>
+
+  <table class="table" id="homework-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Text</th>
+        <th>Course</th>
+        <th>Create Date</th>
+        <th>Delivery Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% include 'homeworks/includes/partial_homework_list.html' %}
+    </tbody>
+  </table>
+
+  <div class="modal fade" id="modal-homework">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+{% endblock %}
